@@ -32,6 +32,7 @@ public class ClientDAO implements ObjectDAO<Client> {
 			for (Client client : clients) {
 				System.out.println(client.getNom_client());
 				System.out.println(client.getAdresse_mail());
+				System.out.println(client.getTel());
 			}
 			statement.close();
 		} catch (SQLException e) {
@@ -130,12 +131,8 @@ public class ClientDAO implements ObjectDAO<Client> {
 
 	public static void main(String[] args) {
 		ClientDAO clientDAO = new ClientDAO();
-		// clientDAO.findAll();
-		// System.out.println(clientDAO.findById(1).getAdresse_mail());
-		// Client client2 = new
-		// Client(10,"souhaib22","souhaib@gmail.com","52630213");
-		// System.out.println(clientDAO.save(client2));
-		clientDAO.removeAll();
+		clientDAO.findAll();
+		
 	}
 
 }
