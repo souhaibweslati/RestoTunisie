@@ -7,6 +7,7 @@ import service.dao.interfaces.ObjectDAO;
 public class CarteDAO implements ObjectDAO<Carte>{
 
 	public List<Carte> findAll() {
+		System.out.println("test");
 		return null;
 	}
 
