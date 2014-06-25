@@ -11,6 +11,7 @@ import java.util.List;
 import service.dao.interfaces.ObjectDAO;
 import utilities.MysqlUtilities;
 import domain.Carte;
+import domain.Resto;
 
 public class CarteDAO implements ObjectDAO<Carte> {
 
@@ -63,21 +64,90 @@ public class CarteDAO implements ObjectDAO<Carte> {
 	}
 
 	public int save(Carte carte) {
+		PreparedStatement updateStatement = null;
+		PreparedStatement insertStatement = null;
+		int rset = 0;
+		Connection con = null;
+
+		try {
+			con = MysqlUtilities.giveMeConnectionConfigured();
+			updateStatement = con
+					.prepareStatement("update carte set nom_carte=? AND id_resto=? where id_carte=?");
+			insertStatement = con
+					.prepareStatement("INSERT INTO carte (nom_carte,id_resto) VALUES (?,?)");
+
+			
+			updateStatement.setString(1,carte.getNom_carte());
+			updateStatement.setInt(2,carte.getResto().getId_resto());
+			updateStatement.setInt(3, carte.getId_carte());
+			
+			
+			insertStatement.setString(1,carte.getNom_carte());
+			insertStatement.setInt(2,carte.getResto().getId_resto());
+			
+			rset = updateStatement.executeUpdate();
+			if (rset == 0)
+				rset = insertStatement.executeUpdate();
+
+			System.out.println("c bon");
+			updateStatement.close();
+			insertStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return 0;
 	}
 
 	public int removeAll() {
+		PreparedStatement deleteStatement = null;
+		// @SuppressWarnings("unused")
+		int rset = 0;
+		Connection con = null;
+
+		try {
+			con = MysqlUtilities.giveMeConnectionConfigured();
+			deleteStatement = con.prepareStatement("DELETE FROM carte");
+			rset = deleteStatement.executeUpdate();
+			System.out.println("c bon");
+
+			deleteStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return 0;
 	}
 
 	public int removeById(int id) {
-		// TODO Auto-generated method stub
+		PreparedStatement deleteStatement = null;
+		int rset = 0;
+		Connection con = null;
+
+		try {
+			con = MysqlUtilities.giveMeConnectionConfigured();
+			deleteStatement = con
+					.prepareStatement("DELETE FROM `carte` WHERE id_carte=?");
+
+			deleteStatement.setInt(1, id);
+			rset = deleteStatement.executeUpdate();
+			System.out.println("c bon");
+
+			deleteStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return 0;
 	}
 
 	public static void main(String[] args) {
+		
 		CarteDAO carteDAO = new CarteDAO();
-		System.out.println(carteDAO.findById(3).getNom_carte());
+		//System.out.println(carteDAO.findById(3).getNom_carte());
+		Resto resto = new Resto();
+		resto.setId_resto(1);
+		Carte carte2 = new Carte("carte7",resto);
+		carteDAO.save(carte2);
+		System.out.println("insertion avec succés");
+		
 	}
 
 }

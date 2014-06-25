@@ -6,6 +6,7 @@ public class Client {
 	private String nom_client;
 	private String adresse_mail;
 	private String tel;
+
 	
 	public Client(){
 	}

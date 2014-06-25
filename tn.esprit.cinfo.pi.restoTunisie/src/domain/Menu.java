@@ -5,8 +5,16 @@ public class Menu {
 	private int id_menu;
 	private String nom_menu;
 	private String prix;
+	private Type type;
+	
 	
 	public Menu() {
+	}
+	
+	public Menu(String nom_menu, String prix) {
+		super();
+		this.nom_menu = nom_menu;
+		this.prix = prix;
 	}
 
 	public Menu(int id_menu, String nom_menu, String prix) {
@@ -14,6 +22,21 @@ public class Menu {
 		this.id_menu = id_menu;
 		this.nom_menu = nom_menu;
 		this.prix = prix;
+	}
+	
+	public Menu(String nom_menu, String prix, Type type) {
+		super();
+		this.nom_menu = nom_menu;
+		this.prix = prix;
+		this.type = type;
+	}
+
+	public Type getType() {
+		return type;
+	}
+
+	public void setType(Type type) {
+		this.type = type;
 	}
 
 	public int getId_menu() {

@@ -4,15 +4,33 @@ public class Commande {
 	
 	private int id_commande;
 	private String commande;
+	Client client;
+	Resto resto;
 	
 	public Commande() {
 	}
-
+	
+	
 	public Commande(int id_commande, String commande) {
 		super();
 		this.id_commande = id_commande;
 		this.commande = commande;
 	}
+	
+	public Commande(String commande) {
+		super();
+		this.commande = commande;
+	}
+	
+	
+	public Commande(int id_commande, String commande, Client client, Resto resto) {
+		super();
+		this.id_commande = id_commande;
+		this.commande = commande;
+		this.client = client;
+		this.resto = resto;
+	}
+
 
 	public int getId_commande() {
 		return id_commande;
@@ -28,6 +46,24 @@ public class Commande {
 
 	public void setCommande(String commande) {
 		this.commande = commande;
+	}
+	
+	
+	
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
+	public Resto getResto() {
+		return resto;
+	}
+
+	public void setResto(Resto resto) {
+		this.resto = resto;
 	}
 
 	@Override

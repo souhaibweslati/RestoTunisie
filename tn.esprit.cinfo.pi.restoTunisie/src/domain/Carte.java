@@ -4,14 +4,28 @@ public class Carte {
 	
 	private int id_carte;
 	private String nom_carte;
-	
+	Resto resto;
+	 
 	public Carte() {
 	}
-
-	public Carte(int id_carte, String nom_carte) {
+	
+	public Carte(int id_carte,String nom_carte) {
 		super();
 		this.id_carte = id_carte;
 		this.nom_carte = nom_carte;
+	}
+	
+
+	public Carte(String nom_carte) {
+		super();
+		this.nom_carte = nom_carte;
+	}
+	
+	
+	public Carte(String nom_carte, Resto resto) {
+		super();
+		this.nom_carte = nom_carte;
+		this.resto = resto;
 	}
 
 	public int getId_carte() {
@@ -28,6 +42,15 @@ public class Carte {
 
 	public void setNom_carte(String nom_carte) {
 		this.nom_carte = nom_carte;
+	}
+	
+	
+	public Resto getResto() {
+		return resto;
+	}
+
+	public void setResto(Resto resto) {
+		this.resto = resto;
 	}
 
 	@Override

@@ -143,14 +143,12 @@ public class ClientDAO implements ObjectDAO<Client> {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 		return 0;
 	}
 
 	public static void main(String[] args) {
 		ClientDAO clientDAO = new ClientDAO();
-		Client client = new Client("sarra", "souhaib.weslati@gmail.com",
-				"29446363");
+		Client client = new Client("Abdsalem", "Abdsalem@gmail.com", "29582364");
 		clientDAO.save(client);
 		// clientDAO.removeById(12);
 

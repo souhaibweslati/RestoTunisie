@@ -18,6 +18,14 @@ public class Resto {
 		this.place_resto = place_resto;
 		this.fourchette = fourchette;
 	}
+	
+	public Resto(String name_resto, String place_resto,
+			String fourchette) {
+		super();
+		this.name_resto = name_resto;
+		this.place_resto = place_resto;
+		this.fourchette = fourchette;
+	}
 
 	public int getId_resto() {
 		return id_resto;
