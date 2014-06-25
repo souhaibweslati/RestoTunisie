@@ -70,7 +70,7 @@ public class RestoTunisie extends JFrame {
 					menuBar.add(avis);
 					
 					// File Menu, F - Mnemonic
-					JMenu aide = new JMenu("aide");
+					JMenu aide = new JMenu("à propos");
 					fileMenu.setMnemonic(KeyEvent.VK_F);
 					menuBar.add(aide);
 
