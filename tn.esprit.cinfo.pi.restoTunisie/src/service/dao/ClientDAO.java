@@ -135,7 +135,7 @@ public class ClientDAO implements ObjectDAO<Client> {
 			deleteStatement = con
 					.prepareStatement("DELETE FROM `client` WHERE id_client=?");
 
-			deleteStatement.setInt(1,id);
+			deleteStatement.setInt(1, id);
 			rset = deleteStatement.executeUpdate();
 			System.out.println("c bon");
 
@@ -143,16 +143,17 @@ public class ClientDAO implements ObjectDAO<Client> {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return 0;
 	}
 
 	public static void main(String[] args) {
 		ClientDAO clientDAO = new ClientDAO();
-		Client client = new Client("sarra","souhaib.weslati@gmail.com","29446363");
+		Client client = new Client("sarra", "souhaib.weslati@gmail.com",
+				"29446363");
 		clientDAO.save(client);
-		//clientDAO.removeById(12);
-		
+		// clientDAO.removeById(12);
+
 	}
 
 }
