@@ -10,10 +10,9 @@ public class Client {
 	public Client(){
 	}
 
-	public Client(int id_client, String nom_client, String adresse_mail,
+	public Client(String nom_client, String adresse_mail,
 			String tel) {
 		super();
-		this.id_client = id_client;
 		this.nom_client = nom_client;
 		this.adresse_mail = adresse_mail;
 		this.tel = tel;
