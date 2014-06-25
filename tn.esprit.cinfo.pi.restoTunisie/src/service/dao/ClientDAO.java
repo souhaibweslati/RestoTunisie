@@ -145,13 +145,4 @@ public class ClientDAO implements ObjectDAO<Client> {
 		}
 		return 0;
 	}
-
-	public static void main(String[] args) {
-		ClientDAO clientDAO = new ClientDAO();
-		Client client = new Client("Abdsalem", "Abdsalem@gmail.com", "29582364");
-		clientDAO.save(client);
-		// clientDAO.removeById(12);
-
-	}
-
 }

@@ -137,17 +137,4 @@ public class CarteDAO implements ObjectDAO<Carte> {
 		}
 		return 0;
 	}
-
-	public static void main(String[] args) {
-		
-		CarteDAO carteDAO = new CarteDAO();
-		//System.out.println(carteDAO.findById(3).getNom_carte());
-		Resto resto = new Resto();
-		resto.setId_resto(1);
-		Carte carte2 = new Carte("carte7",resto);
-		carteDAO.save(carte2);
-		System.out.println("insertion avec succés");
-		
-	}
-
 }
