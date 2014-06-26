@@ -5,13 +5,13 @@ public class Resto {
 	private int id_resto;
 	private String name_resto;
 	private String place_resto;
-	private String fourchette;
+	private int fourchette;
 	
 	public Resto() {
 	}
 
 	public Resto(int id_resto, String name_resto, String place_resto,
-			String fourchette) {
+			int fourchette) {
 		super();
 		this.id_resto = id_resto;
 		this.name_resto = name_resto;
@@ -20,7 +20,7 @@ public class Resto {
 	}
 	
 	public Resto(String name_resto, String place_resto,
-			String fourchette) {
+			int fourchette) {
 		super();
 		this.name_resto = name_resto;
 		this.place_resto = place_resto;
@@ -51,11 +51,11 @@ public class Resto {
 		this.place_resto = place_resto;
 	}
 
-	public String getFourchette() {
+	public int getFourchette() {
 		return fourchette;
 	}
 
-	public void setFourchette(String fourchette) {
+	public void setFourchette(int fourchette) {
 		this.fourchette = fourchette;
 	}
 
@@ -70,8 +70,7 @@ public class Resto {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((fourchette == null) ? 0 : fourchette.hashCode());
+		result = prime * result + fourchette;
 		result = prime * result + id_resto;
 		result = prime * result
 				+ ((name_resto == null) ? 0 : name_resto.hashCode());
@@ -89,10 +88,7 @@ public class Resto {
 		if (getClass() != obj.getClass())
 			return false;
 		Resto other = (Resto) obj;
-		if (fourchette == null) {
-			if (other.fourchette != null)
-				return false;
-		} else if (!fourchette.equals(other.fourchette))
+		if (fourchette != other.fourchette)
 			return false;
 		if (id_resto != other.id_resto)
 			return false;
@@ -108,6 +104,5 @@ public class Resto {
 			return false;
 		return true;
 	}
-	
-	
+
 }

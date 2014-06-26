@@ -1,85 +1,53 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-import java.awt.FlowLayout;
-import java.awt.event.KeyEvent;
-
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
 public class RestoTunisie extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
 
-	/**
-	 * Create the frame.
-	 */
+	static RestoTunisie acceuil = null;
+
 	public RestoTunisie() {
 		setTitle("Resto Tunisie");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
-		JLabel background = new JLabel(new ImageIcon(
-				"Image/background_resto.jpg"));
-		add(background);
-		background.setLayout(new FlowLayout());
+		JPanel contentPanel = new ImporterImage("Image/background_resto.jpg",
+				0, 0);
+		setContentPane(contentPanel);
 
 	}
 
 	public static void main(String args[]) {
 
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					RestoTunisie frame = new RestoTunisie();
-					frame.setVisible(true);
-					frame.setSize(970, 600);
+		acceuil = new RestoTunisie();
+		acceuil.setSize(970, 600);
 
-					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-					JMenuBar menuBar = new JMenuBar();
+		JMenuBar menuBar = new JMenuBar();
 
-					// File Menu, F - Mnemonic
-					JMenu fileMenu = new JMenu("Consulter Carte");
-					fileMenu.setMnemonic(KeyEvent.VK_F);
-					menuBar.add(fileMenu);
+		JMenu consultation = new JMenu("Consulter Resto");
+		menuBar.add(consultation);
 
-//					// File->New, N - Mnemonic
-//					JMenuItem newMenuItem = new JMenuItem("New", KeyEvent.VK_N);
-//					JMenuItem newMenuItem2 = new JMenuItem("New2", KeyEvent.VK_N);
-//					newMenuItem.addActionListener(menuListener);
-//					fileMenu.add(newMenuItem);
-//					fileMenu.add(newMenuItem2);
-					
-					// File Menu, F - Mnemonic
-					JMenu commande = new JMenu("Passer une commande");
-					fileMenu.setMnemonic(KeyEvent.VK_F);
-					menuBar.add(commande);
-					
-					// File Menu, F - Mnemonic
-					JMenu avis = new JMenu("Avis");
-					fileMenu.setMnemonic(KeyEvent.VK_F);
-					menuBar.add(avis);
-					
-					// File Menu, F - Mnemonic
-					JMenu aide = new JMenu("à propos");
-					fileMenu.setMnemonic(KeyEvent.VK_F);
-					menuBar.add(aide);
+		JMenu commande = new JMenu("Passer une commande");
+		menuBar.add(commande);
 
-					frame.setJMenuBar(menuBar);
+		JMenu avis = new JMenu("Avis");
+		menuBar.add(avis);
 
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		JMenu aide = new JMenu("?");
+		menuBar.add(aide);
+
+		acceuil.setJMenuBar(menuBar);
+		acceuil.add(new PanelResto());
+		acceuil.setVisible(true);
+		
+		// // // File->New, N - Mnemonic
+		// // JMenuItem newMenuItem = new JMenuItem("New", KeyEvent.VK_N);
+		// // JMenuItem newMenuItem2 = new JMenuItem("New2", KeyEvent.VK_N);
+		// // newMenuItem.addActionListener(menuListener);
+		// // fileMenu.add(newMenuItem);
+		// // fileMenu.add(newMenuItem2);
 	}
 }
