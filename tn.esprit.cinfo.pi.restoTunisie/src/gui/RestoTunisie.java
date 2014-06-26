@@ -4,6 +4,8 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
 
 public class RestoTunisie extends JFrame {
 
@@ -42,7 +44,23 @@ public class RestoTunisie extends JFrame {
 		acceuil.setJMenuBar(menuBar);
 		acceuil.add(new PanelResto());
 		acceuil.setVisible(true);
-		
+
+		consultation.addMenuListener(new MenuListener() {
+
+			public void menuSelected(MenuEvent e) {
+				System.out.println("selected");
+			}
+
+			public void menuDeselected(MenuEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			public void menuCanceled(MenuEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
 		// // // File->New, N - Mnemonic
 		// // JMenuItem newMenuItem = new JMenuItem("New", KeyEvent.VK_N);
 		// // JMenuItem newMenuItem2 = new JMenuItem("New2", KeyEvent.VK_N);
