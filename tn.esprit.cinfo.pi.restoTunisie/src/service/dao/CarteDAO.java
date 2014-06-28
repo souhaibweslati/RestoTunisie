@@ -18,19 +18,52 @@ public class CarteDAO implements ObjectDAO<Carte> {
 	public List<Carte> findAll() {
 		List<Carte> cartes = new ArrayList<Carte>();
 		Connection connection = MysqlUtilities.giveMeConnectionConfigured();
+		
 		try {
 			Statement statement = connection.createStatement();
-			ResultSet rset = statement.executeQuery("SELECT * FROM `carte`");
+			ResultSet rset = statement.executeQuery("SELECT * From carte");
+			
 			while (rset.next()) {
 				Carte carte = new Carte();
 				carte.setId_carte(rset.getInt("id_carte"));
 				carte.setNom_carte(rset.getString("nom_carte"));
 				cartes.add(carte);
 			}
+			
 			for (Carte carte : cartes) {
 				System.out.println(carte.getId_carte() + "  "
 						+ carte.getNom_carte());
 			}
+			
+			statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return cartes;
+	}
+	
+	public List<Carte> findAllByID(int id_resto) {
+		List<Carte> cartes = new ArrayList<Carte>();
+		PreparedStatement statement = null;
+		ResultSet rset = null;
+		Connection con = null;
+		try {
+			con = MysqlUtilities.giveMeConnectionConfigured();
+			statement = con.prepareStatement("SELECT carte.id_carte ,carte.nom_carte , resto.id_resto FROM `carte` LEFT JOIN resto on carte.id_resto = resto.id_resto where resto.id_resto =?");
+			statement.setInt(1, id_resto);
+			rset = statement.executeQuery();
+			while (rset.next()) {
+				Carte carte = new Carte();
+				carte.setId_carte(rset.getInt("id_carte"));
+				carte.setNom_carte(rset.getString("nom_carte"));
+				cartes.add(carte);
+			}
+			
+			for (Carte carte : cartes) {
+				System.out.println(carte.getId_carte() + "  "
+						+ carte.getNom_carte());
+			}
+			
 			statement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -45,8 +78,7 @@ public class CarteDAO implements ObjectDAO<Carte> {
 		Carte carte = null;
 		try {
 			con = MysqlUtilities.giveMeConnectionConfigured();
-			statement = con
-					.prepareStatement("SELECT * FROM `carte` where id_carte =?");
+			statement = con.prepareStatement("SELECT * FROM `carte` where id_carte =?");
 			statement.setInt(1, id_carte);
 			rset = statement.executeQuery();
 
@@ -136,5 +168,10 @@ public class CarteDAO implements ObjectDAO<Carte> {
 			e.printStackTrace();
 		}
 		return 0;
+	}
+	
+	public static void main(String[] args) {
+		CarteDAO carteDAO = new CarteDAO();
+		carteDAO.findAllByID(1);
 	}
 }

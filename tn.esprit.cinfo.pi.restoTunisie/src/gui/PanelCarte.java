@@ -11,21 +11,21 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 
-import service.dao.RestoDAO;
-import domain.Resto;
+import service.dao.CarteDAO;
+import domain.Carte;
 
-public class PanelResto extends JPanel {
+public class PanelCarte extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private boolean DEBUG = false;
-     public PanelResto() {
+     public PanelCarte(int id_resto) {
     	 
           super(new GridLayout(1, 0));
           
-          RestoDAO restodao = new RestoDAO();
-          List<Resto> restos = restodao.findAll();
+          CarteDAO Cartedao = new CarteDAO();
+          List<Carte> Cartes = Cartedao.findAllByID(id_resto);
           
-          JTable table = new JTable(new MyTableModel(restos));
+          JTable table = new JTable(new MyTableModel(Cartes));
           table.setPreferredScrollableViewportSize(new Dimension(500,100));
           table.setSize(500, 100);
           table.setFillsViewportHeight(true);
@@ -41,12 +41,11 @@ public class PanelResto extends JPanel {
 
      static class MyTableModel extends AbstractTableModel {
 		private static final long serialVersionUID = 1L;
-		private String[] columnNames = { "id", "nom", "lieu",
-                    "forechette"};
-          ArrayList<Resto> restos = null;
+		private String[] columnNames = { "id", "nom_carte"};
+          ArrayList<Carte> Cartes = null;
 
-          MyTableModel(List<Resto> restos) {
-               this.restos = (ArrayList<Resto>) restos;
+          MyTableModel(List<Carte> Cartes) {
+               this.Cartes = (ArrayList<Carte>) Cartes;
           }
 
           public int getColumnCount() {
@@ -54,7 +53,7 @@ public class PanelResto extends JPanel {
           }
 
           public int getRowCount() {
-               return restos.size();
+               return Cartes.size();
           }
 
           public String getColumnName(int col) {
@@ -63,16 +62,12 @@ public class PanelResto extends JPanel {
 
 		public Object getValueAt(int row, int col) {
 			
-	              Resto object = restos.get(row);
+	              Carte object = Cartes.get(row);
 	              switch (col) {
 	              case 0:
-	                   return object.getId_resto();
+	                   return object.getId_carte();
 	              case 1:
-	                   return object.getName_resto();
-	              case 2:
-	                   return object.getPlace_resto();
-	              case 3:
-	                   return object.getFourchette();
+	                   return object.getNom_carte();
 	              
 	              default:
 	                   return "unknown";
@@ -85,11 +80,11 @@ public class PanelResto extends JPanel {
       */
      private static void createAndShowGUI() {
           // Create and set up the window.
-          JFrame frame = new JFrame("PanelResto");
+          JFrame frame = new JFrame("PanelCarte");
           frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
           // Create and set up the content pane.
-          PanelResto newContentPane = new PanelResto();
+          PanelCarte newContentPane = new PanelCarte(1);
           newContentPane.setOpaque(true); // content panes must be opaque
           frame.setContentPane(newContentPane);
 
