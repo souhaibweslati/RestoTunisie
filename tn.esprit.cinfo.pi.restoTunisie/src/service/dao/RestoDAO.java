@@ -85,7 +85,24 @@ public class RestoDAO implements ObjectDAO<Resto> {
 		return 0;
 	}
 
-	public int removeById(int id) {
+	public int removeById(int id_resto) {
+		PreparedStatement deleteStatement = null;
+		int rset = 0;
+		Connection con = null;
+
+		try {
+			con = MysqlUtilities.giveMeConnectionConfigured();
+			deleteStatement = con
+					.prepareStatement("DELETE FROM `resto` WHERE id_resto=?");
+
+			deleteStatement.setInt(1, id_resto);
+			rset = deleteStatement.executeUpdate();
+			System.out.println("c bon");
+
+			deleteStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return 0;
 	}
 	

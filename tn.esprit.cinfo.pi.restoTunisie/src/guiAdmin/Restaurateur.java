@@ -1,12 +1,7 @@
 package guiAdmin;
 
 
-import gui.PanelResto;
-import gui.PanelRestoAdmin;
-
-import java.awt.Color;
 import java.awt.Label;
-import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -17,6 +12,7 @@ import javax.swing.JTextField;
 
 import service.dao.RestoDAO;
 import domain.Resto;
+import guiAdmin.PanelRestoAdmin;
 
 public class Restaurateur extends JFrame {
 
@@ -46,6 +42,7 @@ public class Restaurateur extends JFrame {
 		this.add(placeResto);
 		this.add(labelFourchette);
 		this.add(Fourchette);
+		
 		saveResto.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
@@ -72,6 +69,7 @@ public class Restaurateur extends JFrame {
 			}
 			
 		});
+		
 		this.add(saveResto);
 	}
 	
