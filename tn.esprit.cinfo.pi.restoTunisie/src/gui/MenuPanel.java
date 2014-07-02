@@ -13,22 +13,22 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 
-import service.dao.CarteDAO;
-import domain.Carte;
+import service.dao.MenuDAO;
+import domain.Menu;
 
-public class PanelCarte extends JPanel {
+public class MenuPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private boolean DEBUG = false;
-	private MenuPanel menu;
-     public PanelCarte(int id_resto) {
+	
+     public MenuPanel(int id_carte) {
     	 
           super(new GridLayout(1, 0));
           
-          CarteDAO Cartedao = new CarteDAO();
-          List<Carte> Cartes = Cartedao.findAllByID(id_resto);
+          MenuDAO menudao = new MenuDAO();
+          List<Menu> menus = menudao.findAllById(id_carte);
           
-          final JTable table = new JTable(new MyTableModel(Cartes));
+          final JTable table = new JTable(new MyTableModel(menus));
           table.setPreferredScrollableViewportSize(new Dimension(400,80));
           table.setFillsViewportHeight(true);
           table.setShowGrid(false);
@@ -38,52 +38,17 @@ public class PanelCarte extends JPanel {
           JScrollPane scrollPane = new JScrollPane(table);
           // Add the scroll pane to this panel.
           add(scrollPane);
-          table.addMouseListener(new MouseListener() {
-    			
-    			public void mouseReleased(MouseEvent e) {
-    				// TODO Auto-generated method stub
-    				
-    			}
-    			
-    			public void mousePressed(MouseEvent e) {
-    				// TODO Auto-generated method stub
-    			}
-    			
-    			public void mouseExited(MouseEvent e) {
-    				// TODO Auto-generated method stub
-    				
-    			}
-    			
-    			public void mouseEntered(MouseEvent e) {
-    				// TODO Auto-generated method stub
-    				
-    			}
-    			
-    			public void mouseClicked(MouseEvent e) {
-    				// TODO Auto-generated method stub
-    				 if (table.getSelectedRow() > -1) {
-         	            // print first column value from selected row
-    					 if(menu!= null)
-    						 remove(menu);
-         	            int idcarte=Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString());
-         	            System.out.println("test"+idcarte);
-         	            menu = new MenuPanel(idcarte);
-         	            add(menu);
-         	            setVisible(true);
-         	           revalidate();
-         	        } 
-    			}
-    		});
+          revalidate();
      }
 
 
      static class MyTableModel extends AbstractTableModel {
 		private static final long serialVersionUID = 1L;
-		private String[] columnNames = {"id","nom_carte"};
-          ArrayList<Carte> Cartes = null;
+		private String[] columnNames = {"id","nom_Menu","prix"};
+          ArrayList<Menu> Menus = null;
 
-          MyTableModel(List<Carte> Cartes) {
-               this.Cartes = (ArrayList<Carte>) Cartes;
+          MyTableModel(List<Menu> Menus) {
+               this.Menus = (ArrayList<Menu>) Menus;
           }
 
           public int getColumnCount() {
@@ -91,7 +56,7 @@ public class PanelCarte extends JPanel {
           }
 
           public int getRowCount() {
-               return Cartes.size();
+               return Menus.size();
           }
 
           public String getColumnName(int col) {
@@ -100,12 +65,14 @@ public class PanelCarte extends JPanel {
 
 		public Object getValueAt(int row, int col) {
 			
-	              Carte object = Cartes.get(row);
+	              Menu object = Menus.get(row);
 	              switch (col) {
 	              case 0:
-	                   return object.getId_carte();
+	                   return object.getId_menu();
 	              case 1:
-	                   return object.getNom_carte();
+	                   return object.getNom_menu();
+	              case 2:
+	                   return object.getPrix();
 	             
 	              default:
 	                   return "unknown";
@@ -118,11 +85,11 @@ public class PanelCarte extends JPanel {
       */
 //     private static void createAndShowGUI() {
 //          // Create and set up the window.
-//          JFrame frame = new JFrame("PanelCarte");
+//          JFrame frame = new JFrame("PanelMenu");
 //          frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //
 //          // Create and set up the content pane.
-//          PanelCarte newContentPane = new PanelCarte(1);
+//          PanelMenu newContentPane = new PanelMenu(1);
 //          newContentPane.setOpaque(true); // content panes must be opaque
 //          frame.setContentPane(newContentPane);
 //

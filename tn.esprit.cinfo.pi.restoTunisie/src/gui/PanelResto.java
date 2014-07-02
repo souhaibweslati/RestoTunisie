@@ -1,10 +1,10 @@
 package gui;
 
 import java.awt.Dimension;
-import java.awt.GridLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -17,31 +17,70 @@ import domain.Resto;
 public class PanelResto extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private boolean DEBUG = false;
+	private PanelCarte carte;
      public PanelResto() {
     	 
-          super(new GridLayout(1, 0));
-          
           RestoDAO restodao = new RestoDAO();
           List<Resto> restos = restodao.findAll();
           
-          JTable table = new JTable(new MyTableModel(restos));
-          table.setPreferredScrollableViewportSize(new Dimension(500,100));
-          table.setSize(500, 100);
+          final JTable table = new JTable(new MyTableModel(restos));
+          table.setPreferredScrollableViewportSize(new Dimension(400,100));
           table.setFillsViewportHeight(true);
           table.setShowGrid(false);
           table.setOpaque(false);
-          this.setSize(500,100);
+          this.setSize(300,100);
+          setVisible(true);
+          
+          table.addMouseListener(new MouseListener() {
+			
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+			}
+			
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				 if (table.getSelectedRow() > -1) {
+     	            // print first column value from selected row
+					 if(carte!= null)
+						 remove(carte);
+     	            int idcarte=Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString());
+     	            System.out.println("test"+idcarte);
+     	            carte = new PanelCarte(idcarte);
+     	            add(carte);
+     	            setVisible(true);
+     	           revalidate();
+     	        } 
+			}
+			
+		});
+
           // Create the scroll pane and add the table to it.
           JScrollPane scrollPane = new JScrollPane(table);
           // Add the scroll pane to this panel.
           add(scrollPane);
+          
+          
      }
 
 
      static class MyTableModel extends AbstractTableModel {
 		private static final long serialVersionUID = 1L;
-		private String[] columnNames = { "id", "nom", "lieu",
+		private String[] columnNames = { "id","nom", "lieu",
                     "forechette"};
           ArrayList<Resto> restos = null;
 
@@ -65,6 +104,7 @@ public class PanelResto extends JPanel {
 			
 	              Resto object = restos.get(row);
 	              switch (col) {
+	            
 	              case 0:
 	                   return object.getId_resto();
 	              case 1:
@@ -77,12 +117,16 @@ public class PanelResto extends JPanel {
 	              default:
 	                   return "unknown";
 	              }
+	              
+	           
      }
 
      /**
       * Create the GUI and show it. For thread safety, this method should be
       * invoked from the event-dispatching thread.
       */
+		
+		
      private static void createAndShowGUI() {
           // Create and set up the window.
           JFrame frame = new JFrame("PanelResto");

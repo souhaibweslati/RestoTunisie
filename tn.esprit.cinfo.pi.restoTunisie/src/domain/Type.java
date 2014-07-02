@@ -12,6 +12,7 @@ public class Type {
 		super();
 		this.id_type = id_type;
 		this.nom_type = nom_type;
+		
 	}
 
 	public int getId_type() {
