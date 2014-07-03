@@ -43,6 +43,8 @@ public class Restaurateur extends JFrame {
 		this.add(labelFourchette);
 		this.add(Fourchette);
 		
+		
+		
 		saveResto.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
@@ -73,9 +75,8 @@ public class Restaurateur extends JFrame {
 		this.add(saveResto);
 	}
 	
-
 	public static void main(String args[]) {
-
+		
 		acceuil = new Restaurateur();
 		restotablo.refreshview();
 		acceuil.add(restotablo);

@@ -14,29 +14,29 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 
-import service.dao.RestoDAO;
-import domain.Resto;
+import service.dao.CarteDAO;
+import domain.Carte;
 
-public class PanelRestoAdmin extends JPanel {
+public class PanelCarteAdmin extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	public JTable table;
 	private PanelRestoAdmin id_resto;
 	public JScrollPane scrollPane;
 	public int id;
-	static JButton deleteResto = new JButton("Delete Resto");
+	static JButton deleteCarte = new JButton("Delete Carte");
 	public static PanelRestoAdmin restotablo = new PanelRestoAdmin();
 
-	public PanelRestoAdmin() {
-
+	public PanelCarteAdmin() {
+			refreshview();
 	}
 
 	public void refreshview() {
 
-		RestoDAO restodao = new RestoDAO();
-		List<Resto> restos = restodao.findAll();
+		CarteDAO cartedao = new CarteDAO();
+		List<Carte> cartes = cartedao.findAll();
 
-		table = new JTable(new MyTableModel(restos));
+		table = new JTable(new MyTableModel(cartes));
 
 		table.setPreferredScrollableViewportSize(new Dimension(400, 100));
 		table.setFillsViewportHeight(true);
@@ -54,7 +54,7 @@ public class PanelRestoAdmin extends JPanel {
 		scrollPane.setVisible(true);
 
 		add(scrollPane);
-		add(deleteResto);
+		add(deleteCarte);
 		revalidate();
 		repaint();
 		setVisible(true);
@@ -95,9 +95,9 @@ public class PanelRestoAdmin extends JPanel {
 			}
 		});
 		
-		deleteResto.addActionListener(new ActionListener() {
+		deleteCarte.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				RestoDAO restoDao = new RestoDAO();
+				CarteDAO restoDao = new CarteDAO();
 				restoDao.removeById(id);
 				scrollPane.remove(table);
 				remove(scrollPane);
@@ -111,11 +111,11 @@ public class PanelRestoAdmin extends JPanel {
 	
 	static class MyTableModel extends AbstractTableModel {
 		private static final long serialVersionUID = 1L;
-		private String[] columnNames = { "id", "nom", "lieu", "forechette" };
-		ArrayList<Resto> restos = null;
+		private String[] columnNames = { "id", "nom"};
+		ArrayList<Carte> cartes = null;
 
-		MyTableModel(List<Resto> restos) {
-			this.restos = (ArrayList<Resto>) restos;
+		MyTableModel(List<Carte> cartes) {
+			this.cartes = (ArrayList<Carte>) cartes;
 		}
 
 		public int getColumnCount() {
@@ -123,7 +123,7 @@ public class PanelRestoAdmin extends JPanel {
 		}
 
 		public int getRowCount() {
-			return restos.size();
+			return cartes.size();
 		}
 
 		public String getColumnName(int col) {
@@ -132,17 +132,13 @@ public class PanelRestoAdmin extends JPanel {
 
 		public Object getValueAt(int row, int col) {
 
-			Resto object = restos.get(row);
+			Carte object = cartes.get(row);
 			switch (col) {
 
 			case 0:
-				return object.getId_resto();
+				return object.getId_carte();
 			case 1:
-				return object.getName_resto();
-			case 2:
-				return object.getPlace_resto();
-			case 3:
-				return object.getFourchette();
+				return object.getNom_carte();
 
 			default:
 				return "unknown";
@@ -172,4 +168,6 @@ public class PanelRestoAdmin extends JPanel {
 		// }
 
 	}
+	
+
 }

@@ -103,10 +103,8 @@ public class CarteDAO implements ObjectDAO<Carte> {
 
 		try {
 			con = MysqlUtilities.giveMeConnectionConfigured();
-			updateStatement = con
-					.prepareStatement("update carte set nom_carte=? AND id_resto=? where id_carte=?");
-			insertStatement = con
-					.prepareStatement("INSERT INTO carte (nom_carte,id_resto) VALUES (?,?)");
+			updateStatement = con.prepareStatement("update carte set nom_carte=? AND id_resto=? where id_carte=?");
+			insertStatement = con.prepareStatement("INSERT INTO carte (nom_carte,id_resto) VALUES (?,?)");
 
 			
 			updateStatement.setString(1,carte.getNom_carte());
