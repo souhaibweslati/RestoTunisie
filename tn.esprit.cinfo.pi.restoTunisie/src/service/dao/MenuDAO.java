@@ -10,6 +10,7 @@ import java.util.List;
 
 import service.dao.interfaces.ObjectDAO;
 import utilities.MysqlUtilities;
+import domain.Carte;
 import domain.Menu;
 
 public class MenuDAO implements ObjectDAO<Menu> {
@@ -72,8 +73,38 @@ public class MenuDAO implements ObjectDAO<Menu> {
 	}
 
 
-	public int save(Menu t) {
-		// TODO Auto-generated method stub
+	public int save(Menu menu) {
+		PreparedStatement updateStatement = null;
+		PreparedStatement insertStatement = null;
+		int rset = 0;
+		Connection con = null;
+
+		try {
+			con = MysqlUtilities.giveMeConnectionConfigured();
+			updateStatement = con.prepareStatement("update menu set nom_menu=? AND prix=? And id_carte=? where id_menu=?");
+			insertStatement = con.prepareStatement("INSERT INTO menu (nom_menu,prix,id_carte) VALUES (?,?,?)");
+
+			
+			updateStatement.setString(1,menu.getNom_menu());
+			updateStatement.setString(2,menu.getPrix());
+			updateStatement.setInt(3,menu.getCarte().getId_carte());
+			updateStatement.setInt(4, menu.getId_menu());
+			
+			
+			insertStatement.setString(1,menu.getNom_menu());
+			insertStatement.setString(2,menu.getPrix());
+			insertStatement.setInt(3, menu.getCarte().getId_carte());
+			
+			rset = updateStatement.executeUpdate();
+			if (rset == 0)
+				rset = insertStatement.executeUpdate();
+
+			System.out.println("c bon");
+			updateStatement.close();
+			insertStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return 0;
 	}
 
@@ -82,8 +113,24 @@ public class MenuDAO implements ObjectDAO<Menu> {
 		return 0;
 	}
 
-	public int removeById(int id) {
-		// TODO Auto-generated method stub
+	public int removeById(int id_menu) {
+		PreparedStatement deleteStatement = null;
+		int rset = 0;
+		Connection con = null;
+
+		try {
+			con = MysqlUtilities.giveMeConnectionConfigured();
+			deleteStatement = con
+					.prepareStatement("DELETE FROM `menu` WHERE id_menu=?");
+
+			deleteStatement.setInt(1, id_menu);
+			rset = deleteStatement.executeUpdate();
+			System.out.println("c bon");
+
+			deleteStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return 0;
 	}
 	
@@ -95,7 +142,10 @@ public class MenuDAO implements ObjectDAO<Menu> {
 	
 	public static void main(String[] args) {
 		MenuDAO dao = new MenuDAO();
-		dao.findAllById(2);
+		Carte carte = new Carte();
+		carte.setId_carte(1);
+		Menu menu = new Menu("Funta", "1700 dt", carte);
+		dao.save(menu);
 	}
 	
 }

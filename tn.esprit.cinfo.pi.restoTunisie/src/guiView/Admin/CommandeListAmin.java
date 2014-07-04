@@ -1,4 +1,7 @@
-package guiAdmin;
+package guiView.Admin;
+
+import guiAdmin.ImporterImage;
+import guiAdmin.PanelCommandeAdmin;
 
 import java.awt.Color;
 

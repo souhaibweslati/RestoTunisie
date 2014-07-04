@@ -1,4 +1,4 @@
-package guiAdmin;
+package guiView.Admin;
 
 
 import java.awt.Label;
@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 
 import service.dao.RestoDAO;
 import domain.Resto;
+import guiAdmin.ImporterImage;
 import guiAdmin.PanelRestoAdmin;
 
 public class Restaurateur extends JFrame {

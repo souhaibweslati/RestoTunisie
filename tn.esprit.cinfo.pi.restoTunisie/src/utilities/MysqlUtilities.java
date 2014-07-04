@@ -28,5 +28,9 @@ public class MysqlUtilities {
 		return myConnection;
 	}
 	
+	public static void main(String[] args) {
+		giveMeConnectionConfigured();
+	}
+	
 	
 }

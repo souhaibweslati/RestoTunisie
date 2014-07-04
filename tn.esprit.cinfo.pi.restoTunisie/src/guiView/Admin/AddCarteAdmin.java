@@ -1,4 +1,7 @@
-package guiAdmin;
+package guiView.Admin;
+
+import guiAdmin.ImporterImage;
+import guiAdmin.PanelCarteAdmin;
 
 import java.awt.Label;
 import java.awt.event.ActionEvent;

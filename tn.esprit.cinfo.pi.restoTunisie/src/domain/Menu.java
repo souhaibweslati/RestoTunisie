@@ -5,7 +5,7 @@ public class Menu {
 	private int id_menu;
 	private String nom_menu;
 	private String prix;
-	private Type type;
+	Carte carte;
 	
 	
 	public Menu() {
@@ -24,19 +24,19 @@ public class Menu {
 		this.prix = prix;
 	}
 	
-	public Menu(String nom_menu, String prix, Type type) {
+	public Menu(String nom_menu, String prix, Carte carte) {
 		super();
 		this.nom_menu = nom_menu;
 		this.prix = prix;
-		this.type = type;
+		this.carte = carte;
 	}
 
-	public Type getType() {
-		return type;
+	public Carte getCarte() {
+		return carte;
 	}
 
-	public void setType(Type type) {
-		this.type = type;
+	public void setCarte(Carte carte) {
+		this.carte = carte;
 	}
 
 	public int getId_menu() {

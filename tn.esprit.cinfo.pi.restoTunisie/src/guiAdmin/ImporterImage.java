@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.Image;
 
 import javax.swing.*;
-class ImporterImage extends JPanel {
+public class ImporterImage extends JPanel {
 	private static final long serialVersionUID = 1L;
 	int x,y,hauteur;
 	int choix=0;

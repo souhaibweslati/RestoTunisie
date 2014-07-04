@@ -14,30 +14,32 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 
-import service.dao.CommandeDAO;
-import domain.Commande;
+import service.dao.CarteDAO;
+import service.dao.MenuDAO;
+import domain.Carte;
+import domain.Menu;
 
-public class PanelCommandeAdmin extends JPanel {
+public class PanelMenuAdmin extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	public JTable table;
-	private PanelCommandeAdmin id_commande;
+	private PanelRestoAdmin id_menu;
 	public JScrollPane scrollPane;
 	public int id;
-	static JButton deleteCommande = new JButton("Delete Commande");
+	static JButton deleteMenu = new JButton("Delete Menu");
 
-	public PanelCommandeAdmin() {
-		refreshview();
+	public PanelMenuAdmin() {
+			refreshview();
 	}
 
 	public void refreshview() {
 
-		CommandeDAO commandeDao = new CommandeDAO();
-		List<Commande> commandes = commandeDao.findAll();
+		MenuDAO menudao = new MenuDAO();
+		List<Menu> menus = menudao.findAll();
 
-		table = new JTable(new MyTableModel(commandes));
+		table = new JTable(new MyTableModel(menus));
 
-		table.setPreferredScrollableViewportSize(new Dimension(800, 100));
+		table.setPreferredScrollableViewportSize(new Dimension(400, 100));
 		table.setFillsViewportHeight(true);
 		table.setShowGrid(false);
 		table.setOpaque(false);
@@ -53,7 +55,7 @@ public class PanelCommandeAdmin extends JPanel {
 		scrollPane.setVisible(true);
 
 		add(scrollPane);
-		add(deleteCommande);
+		add(deleteMenu);
 		revalidate();
 		repaint();
 		setVisible(true);
@@ -61,39 +63,43 @@ public class PanelCommandeAdmin extends JPanel {
 		table.addMouseListener(new MouseListener() {
 
 			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
 
 			}
 
 			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
 			}
 
 			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
 
 			}
 
 			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
 
 			}
 
 			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
 				if (table.getSelectedRow() > -1) {
 					// print first column value from selected row
-					if (id_commande != null)
-						remove(id_commande);
+					if (id_menu != null)
+						remove(id_menu);
 
-					id = Integer.parseInt(table.getValueAt(
-							table.getSelectedRow(), 0).toString());
+					id = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString());
 					System.out.println("test" + id);
 					setVisible(true);
 					revalidate();
 				}
 			}
 		});
-
-		deleteCommande.addActionListener(new ActionListener() {
+		
+		deleteMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CommandeDAO commandeDAO = new CommandeDAO();
-				commandeDAO.removeById(id);
+				MenuDAO menuDao = new MenuDAO();
+				menuDao.removeById(id);
 				scrollPane.remove(table);
 				remove(scrollPane);
 				refreshview();
@@ -103,13 +109,14 @@ public class PanelCommandeAdmin extends JPanel {
 		});
 	}
 
+	
 	static class MyTableModel extends AbstractTableModel {
 		private static final long serialVersionUID = 1L;
-		private String[] columnNames = { "id", "Commande","Name Client","Mail Client","Tel client","Name Resto" };
-		ArrayList<Commande> commandes = null;
+		private String[] columnNames = { "id", "nom","Prix"};
+		ArrayList<Menu> menus = null;
 
-		MyTableModel(List<Commande> commandes) {
-			this.commandes = (ArrayList<Commande>) commandes;
+		MyTableModel(List<Menu> menus) {
+			this.menus = (ArrayList<Menu>) menus;
 		}
 
 		public int getColumnCount() {
@@ -117,7 +124,7 @@ public class PanelCommandeAdmin extends JPanel {
 		}
 
 		public int getRowCount() {
-			return commandes.size();
+			return menus.size();
 		}
 
 		public String getColumnName(int col) {
@@ -126,27 +133,42 @@ public class PanelCommandeAdmin extends JPanel {
 
 		public Object getValueAt(int row, int col) {
 
-			Commande object = commandes.get(row);
+			Menu object = menus.get(row);
 			switch (col) {
 
 			case 0:
-				return object.getId_commande();
+				return object.getId_menu();
 			case 1:
-				return object.getCommande();
+				return object.getNom_menu();
 			case 2:
-				return object.getClient().getNom_client();
-			case 3:
-				return object.getClient().getAdresse_mail();
-			case 4:
-				return object.getClient().getTel();
-			case 5:
-				return object.getResto().getName_resto();
+				return object.getPrix();
 
 			default:
 				return "unknown";
 			}
 
 		}
+
+		/**
+		 * Create the GUI and show it. For thread safety, this method should be
+		 * invoked from the event-dispatching thread.
+		 */
+
+		// private static void createAndShowGUI() {
+		// // Create and set up the window.
+		// JFrame frame = new JFrame("PanelResto");
+		// frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//
+		// // Create and set up the content pane.
+		// PanelRestoAdmin newContentPane = new PanelRestoAdmin();
+		// newContentPane.setOpaque(true); // content panes must be opaque
+		// frame.setContentPane(newContentPane);
+		//
+		// // Display the window.
+		// frame.pack();
+		// frame.setVisible(true);
+		//
+		// }
 
 	}
 	

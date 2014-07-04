@@ -1,4 +1,6 @@
-package gui;
+package guiView;
+
+import gui.ImporterImage;
 
 import java.awt.Label;
 import java.awt.event.ActionEvent;
