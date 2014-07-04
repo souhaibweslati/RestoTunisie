@@ -14,9 +14,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 
-import service.dao.CarteDAO;
 import service.dao.CommandeDAO;
-import domain.Carte;
 import domain.Commande;
 
 public class PanelCommandeAdmin extends JPanel {
@@ -26,8 +24,7 @@ public class PanelCommandeAdmin extends JPanel {
 	private PanelCommandeAdmin id_commande;
 	public JScrollPane scrollPane;
 	public int id;
-	static JButton deleteCarte = new JButton("Delete Carte");
-	public static PanelRestoAdmin restotablo = new PanelRestoAdmin();
+	static JButton deleteCommande = new JButton("Delete Commande");
 
 	public PanelCommandeAdmin() {
 		refreshview();
@@ -40,7 +37,7 @@ public class PanelCommandeAdmin extends JPanel {
 
 		table = new JTable(new MyTableModel(commandes));
 
-		table.setPreferredScrollableViewportSize(new Dimension(600, 100));
+		table.setPreferredScrollableViewportSize(new Dimension(800, 100));
 		table.setFillsViewportHeight(true);
 		table.setShowGrid(false);
 		table.setOpaque(false);
@@ -56,7 +53,7 @@ public class PanelCommandeAdmin extends JPanel {
 		scrollPane.setVisible(true);
 
 		add(scrollPane);
-		add(deleteCarte);
+		add(deleteCommande);
 		revalidate();
 		repaint();
 		setVisible(true);
@@ -98,17 +95,17 @@ public class PanelCommandeAdmin extends JPanel {
 			}
 		});
 
-//		deleteCarte.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				CarteDAO restoDao = new CarteDAO();
-//				restoDao.removeById(id);
-//				scrollPane.remove(table);
-//				remove(scrollPane);
-//				refreshview();
-//				repaint();
-//			}
-//
-//		});
+		deleteCommande.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CommandeDAO commandeDAO = new CommandeDAO();
+				commandeDAO.removeById(id);
+				scrollPane.remove(table);
+				remove(scrollPane);
+				refreshview();
+				repaint();
+			}
+
+		});
 	}
 
 	static class MyTableModel extends AbstractTableModel {
