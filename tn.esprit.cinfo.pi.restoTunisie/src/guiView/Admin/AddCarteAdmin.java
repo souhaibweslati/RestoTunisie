@@ -34,6 +34,7 @@ public class AddCarteAdmin extends JFrame {
 	private JComboBox liste;
 	public int idSelected ;
 	static PanelCarteAdmin carteAdmin = new PanelCarteAdmin();
+	static JButton close = new JButton("Close");
 	public AddCarteAdmin() {
 		
 		
@@ -94,11 +95,23 @@ public class AddCarteAdmin extends JFrame {
 		this.add(saveCarte);
 		this.add(carteAdmin);
 	}
-
-	public static void main(String args[]) {
+	
+	public void loadView(){
+		
 		acceuil = new AddCarteAdmin();
+		close.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				acceuil.remove(carteAdmin);
+				acceuil.dispose();
+				
+			}
+		});
 		acceuil.setSize(1280, 600);
+		acceuil.add(close);
 		acceuil.setVisible(true);
-
+		
+		
 	}
+
 }

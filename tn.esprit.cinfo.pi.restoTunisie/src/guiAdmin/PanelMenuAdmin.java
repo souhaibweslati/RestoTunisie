@@ -142,7 +142,6 @@ public class PanelMenuAdmin extends JPanel {
 				return object.getNom_menu();
 			case 2:
 				return object.getPrix();
-
 			default:
 				return "unknown";
 			}

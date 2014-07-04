@@ -17,7 +17,7 @@ import javax.swing.table.AbstractTableModel;
 import service.dao.RestoDAO;
 import domain.Resto;
 
-public class PanelRestoAdmin extends JPanel {
+public class PanelRestoAdmin extends JPanel  {
 
 	private static final long serialVersionUID = 1L;
 	public JTable table;
@@ -26,7 +26,7 @@ public class PanelRestoAdmin extends JPanel {
 	public int id;
 	static JButton deleteResto = new JButton("Delete Resto");
 	public static PanelRestoAdmin restotablo = new PanelRestoAdmin();
-
+	
 	public PanelRestoAdmin() {
 
 	}
@@ -55,7 +55,7 @@ public class PanelRestoAdmin extends JPanel {
 
 		add(scrollPane);
 		add(deleteResto);
-		revalidate();
+		
 		repaint();
 		setVisible(true);
 
@@ -106,6 +106,7 @@ public class PanelRestoAdmin extends JPanel {
 			}
 
 		});
+		
 	}
 
 	

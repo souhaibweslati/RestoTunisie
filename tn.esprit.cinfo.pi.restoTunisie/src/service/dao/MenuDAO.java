@@ -12,6 +12,7 @@ import service.dao.interfaces.ObjectDAO;
 import utilities.MysqlUtilities;
 import domain.Carte;
 import domain.Menu;
+import domain.Resto;
 
 public class MenuDAO implements ObjectDAO<Menu> {
 
@@ -28,6 +29,7 @@ public class MenuDAO implements ObjectDAO<Menu> {
 				menu.setId_menu(rset.getInt("id_Menu"));
 				menu.setNom_menu(rset.getString("nom_Menu"));
 				menu.setPrix(rset.getString("prix"));
+
 				menus.add(menu);
 			}
 			
@@ -136,16 +138,7 @@ public class MenuDAO implements ObjectDAO<Menu> {
 	
 	
 	public Menu findById(int id) {
-		// TODO Auto-generated method stub
 		return null;
-	}
-	
-	public static void main(String[] args) {
-		MenuDAO dao = new MenuDAO();
-		Carte carte = new Carte();
-		carte.setId_carte(1);
-		Menu menu = new Menu("Funta", "1700 dt", carte);
-		dao.save(menu);
 	}
 	
 }

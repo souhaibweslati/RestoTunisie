@@ -74,7 +74,7 @@ public class CommandeDAO implements ObjectDAO<Commande> {
 			
 			insertStatement.setInt(1,commande.getResto().getId_resto());
 			insertStatement.setInt(2,commande.getClient().getId_client());
-			insertStatement.setString(3, commande.getCommande());
+			insertStatement.setString(3,commande.getCommande());
 			
 			rset = updateStatement.executeUpdate();
 			if (rset == 0)

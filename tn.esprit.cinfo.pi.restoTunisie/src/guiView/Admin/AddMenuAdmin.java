@@ -1,8 +1,6 @@
 package guiView.Admin;
 
-import gui.MenuPanel;
 import guiAdmin.ImporterImage;
-import guiAdmin.PanelCarteAdmin;
 import guiAdmin.PanelMenuAdmin;
 
 import java.awt.Label;
@@ -19,10 +17,8 @@ import javax.swing.JTextField;
 
 import service.dao.CarteDAO;
 import service.dao.MenuDAO;
-import service.dao.RestoDAO;
 import domain.Carte;
 import domain.Menu;
-import domain.Resto;
 
 
 
@@ -41,13 +37,14 @@ public class AddMenuAdmin extends JFrame {
 	private JComboBox liste;
 	public int idSelected ;
 	public PanelMenuAdmin menuAdmin = new PanelMenuAdmin();
+	static JButton close = new JButton("Close");
 	public AddMenuAdmin() {
 		
 		
 		
 		CarteDAO dao = new CarteDAO();
 		List<Carte> cartes = dao.findAll();
-		
+
 		String[] nomCarte = new String[cartes.size()];
 		final int[] idCarte = new int[cartes.size()];
 		
@@ -105,11 +102,21 @@ public class AddMenuAdmin extends JFrame {
 		this.add(saveMenu);
 		this.add(menuAdmin);
 	}
-
-	public static void main(String args[]) {
+	
+	public void loadView(){
+		
 		acceuil = new AddMenuAdmin();
+		close.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				acceuil.remove(menuAdmin);
+				acceuil.dispose();
+				
+			}
+		});
+		acceuil.add(close);
 		acceuil.setSize(1280, 600);
 		acceuil.setVisible(true);
-
 	}
+
 }

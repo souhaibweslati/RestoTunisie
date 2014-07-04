@@ -34,6 +34,7 @@ public class AddCommandeClient extends JFrame {
 	private JComboBox listeResto;
 	public int idSelectedClient;
 	public int idSelectedResto;
+	static JButton close = new JButton("Close");
 
 	public AddCommandeClient() {
 
@@ -102,12 +103,12 @@ public class AddCommandeClient extends JFrame {
 
 				Resto resto = new Resto();
 				resto.setId_resto(idSelectedResto);
-				
+
 				Client client = new Client();
 				client.setId_client(idSelectedClient);
-				
-				Commande commande = new Commande(nameCommande.getText(),client,resto);
-				
+
+				Commande commande = new Commande(nameCommande.getText(),client, resto);
+
 				commandeDAO.save(commande);
 				nameCommande.setText("");
 
@@ -118,9 +119,19 @@ public class AddCommandeClient extends JFrame {
 		this.add(saveCommande);
 	}
 
-	public static void main(String args[]) {
+	public void loadView() {
+
 		acceuil = new AddCommandeClient();
 		acceuil.setSize(1280, 600);
+		close.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				// acceuil.remove(resto);
+				acceuil.dispose();
+
+			}
+		});
+		acceuil.add(close);
 		acceuil.setVisible(true);
 
 	}
