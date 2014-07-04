@@ -23,9 +23,8 @@ public class Commande {
 	}
 	
 	
-	public Commande(int id_commande, String commande, Client client, Resto resto) {
+	public Commande(String commande, Client client, Resto resto) {
 		super();
-		this.id_commande = id_commande;
 		this.commande = commande;
 		this.client = client;
 		this.resto = resto;

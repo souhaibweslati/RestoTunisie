@@ -61,26 +61,21 @@ public class PanelCommandeAdmin extends JPanel {
 		table.addMouseListener(new MouseListener() {
 
 			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
 
 			}
 
 			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
 			}
 
 			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
 
 			}
 
 			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
 
 			}
 
 			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
 				if (table.getSelectedRow() > -1) {
 					// print first column value from selected row
 					if (id_commande != null)
@@ -152,27 +147,6 @@ public class PanelCommandeAdmin extends JPanel {
 			}
 
 		}
-
-		/**
-		 * Create the GUI and show it. For thread safety, this method should be
-		 * invoked from the event-dispatching thread.
-		 */
-
-		// private static void createAndShowGUI() {
-		// // Create and set up the window.
-		// JFrame frame = new JFrame("PanelResto");
-		// frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//
-		// // Create and set up the content pane.
-		// PanelRestoAdmin newContentPane = new PanelRestoAdmin();
-		// newContentPane.setOpaque(true); // content panes must be opaque
-		// frame.setContentPane(newContentPane);
-		//
-		// // Display the window.
-		// frame.pack();
-		// frame.setVisible(true);
-		//
-		// }
 
 	}
 	
